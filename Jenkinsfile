@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Git clone') {
             steps {
-                git url: 'https://github.com/virtualram-rgb/game-of-life.git', branch: 'master'
+                git url: 'https://github.com/virutalneworg/game-of-life.git', branch: 'master'
             }
         }  
         stage('artifactory'){
@@ -11,8 +11,8 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER" ,
                     serverId: 'jfrog_instance',
-                    releaseRepo: 'libs-release',
-                    snapshotRepo: 'libs-snapshot'
+                    releaseRepo: 'libs-release-local',
+                    snapshotRepo: 'libs-snapshot-local'
                 )
             }
         }
