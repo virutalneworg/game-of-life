@@ -12,17 +12,18 @@ pipeline {
                     id: "MAVEN_DEPLOYER" ,
                     serverId: 'jfrog_instance',
                     releaseRepo: 'libs-release-local',
-                    snapshotRepo: 'libs-snapshot-local'
+                    snapshotRepo: 'libs-snapshot-local',
+                    deployArtifacts: 'true' 
                 )
             }
         }
-	stage ('build') {
+        stage ('build') {
             steps {
                 withSonarQubeEnv('SONAR_SELF_HOSTED'){
-                    sh 'mvn package sonar:sonar'
+                    sh 'mvn install sonar:sonar'
                 }
             }
-        } 
+        }
         stage('Publishtheartifacts'){
             steps{
                 rtPublishBuildInfo (
